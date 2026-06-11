@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 20px; background: #f4f4f9; }
+        .box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        code { background: #eee; padding: 2px 4px; border-radius: 4px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to CS 101: Python Basics</h1>
+    
+    <div class="box">
+        <h3>1. The Variable (The Container)</h3>
+        <p>A variable is a labeled box that holds data. Let's create one.</p>
+        <button onclick="createVar()">Create Variable 'x'</button>
+        <p id="var-output">Result: Waiting...</p>
+    </div>
+
+    <div class="box">
+        <h3>2. The Conditional (The Decision)</h3>
+        <p>Code needs to make decisions. If x > 10, print "Large".</p>
+        <button onclick="checkVar()">Run Decision Logic</button>
+        <p id="logic-output">Result: Waiting...</p>
+    </div>
+
+    <script>
+        let x = 0;
+        function createVar() {
+            x = Math.floor(Math.random() * 20);
+            document.getElementById('var-output').innerHTML = `Variable 'x' is now: <strong>${x}</strong>`;
+        }
+        function checkVar() {
+            let msg = (x > 10) ? "It's a large number!" : "It's a small number.";
+            document.getElementById('logic-output').innerHTML = `Logic check: <strong>${msg}</strong>`;
+        }
+    </script>
+</body>
+</html>
