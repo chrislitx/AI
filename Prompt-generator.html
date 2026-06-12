@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Lesson Plan Prompt Generator</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --border-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        input[type="text"], textarea, select {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #fff;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .output-section {
+            margin-top: 30px;
+            background-color: #f1f5f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .output-header h3 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .btn-copy {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-copy:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn-copy.copied {
+            background-color: #10b981;
+        }
+
+        pre {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            min-height: 150px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Lesson Plan Prompt Generator</h1>
+    
+    <div class="grid">
+        <div class="form-group">
+            <label for="title">Lesson Title / Course Name</label>
+            <input type="text" id="title" placeholder="e.g., Introduction to Macroeconomics: Inflation">
+        </div>
+
+        <div class="form-group">
+            <label for="audience">Target Audience</label>
+            <input type="text" id="audience" placeholder="e.g., Community college freshmen, diverse backgrounds">
+        </div>
+
+        <div class="form-group full-width">
+            <label for="topics">Topics Covered (Separate with commas)</label>
+            <textarea id="topics" placeholder="e.g., Definition of inflation, Consumer Price Index (CPI), Hyperinflation, Effects on purchasing power"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+            <label for="terms">Key Terms to Define (Separate with commas)</label>
+            <input type="text" id="terms" placeholder="e.g., Inflation, Deflation, Stagflation, Market Basket">
+        </div>
+
+        <div class="form-group">
+            <label for="activities">Preferred Activity Types</label>
+            <select id="activities">
+                <option value="Think-Pair-Share and a brief group analysis worksheet">Collaborative / Group Work</option>
+                <option value="An interactive class debate and polling questions">Active Discussion / Debate</option>
+                <option value="A hands-on case study analysis and problem-solving set">Case Study / Problem Solving</option>
+                <option value="Individual reflection, short quiz, and quick writing prompt">Individual Reflection / Assessment</option>
+                <option value="A mixture of short lecture checkpoints, peer review, and active learning exercises">Blended / Mixed Modality</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="justify-content: center;">
+            <div class="checkbox-group">
+                <input type="checkbox" id="ada" checked>
+                <label for="ada">Enforce ADA Compliance (Alt text tags, structured headings)</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="analogies" checked>
+                <label for="analogies">Include Analogies & Real-World Examples</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="output-section">
+        <div class="output-header">
+            <h3>Your Generated AI Prompt</h3>
+            <button class="btn-copy" id="copyBtn" onclick="copyPrompt()">Copy Prompt</button>
+        </div>
+        <pre id="promptOutput">Fill out the form fields above to dynamically build your academic AI prompt...</pre>
+    </div>
+</div>
+
+<script>
+    // Grab elements
+    const inputs = document.querySelectorAll('input, textarea, select');
+    const promptOutput = document.getElementById('promptOutput');
+    const copyBtn = document.getElementById('copyBtn');
+
+    // Function to generate the prompt text
+    function updatePrompt() {
+        const title = document.getElementById('title').value.trim() || '[Insert Title Here]';
+        const audience = document.getElementById('audience').value.trim() || '[Insert Student Audience Here]';
+        const topics = document.getElementById('topics').value.trim() || '[Insert Topics to Cover Here]';
+        const terms = document.getElementById('terms').value.trim() || '[Insert Key Terms Here]';
+        const activities = document.getElementById('activities').value;
+        const isAda = document.getElementById('ada').checked;
+        const useAnalogies = document.getElementById('analogies').checked;
+
+        // Construct the prompt string using structured markdown template
+        let prompt = `You are an expert instructional designer specializing in higher education, specifically community college pedagogy. Please draft a comprehensive, highly engaging lesson plan based on the following criteria:
+
+### Course/Lesson Context:
+- **Lesson Title:** ${title}
+- **Target Student Audience:** ${audience}
+
+### Content Scope:
+- **Core Topics to Cover:** ${topics}
+- **Key Technical Terms to Define:** ${terms}
+
+### Pedagogical Strategy:
+- **Active Learning Component:** Integrate an explicit structure for: ${activities}. Ensure this is actionable for a 50-to-75-minute class format.
+`;
+
+        if (useAnalogies) {
+            prompt += `- **Scaffolding:** Include at least two relatable, real-world analogies or everyday scenarios to help explain the more abstract or complex terms listed above.\n`;
+        }
+
+        if (isAda) {
+            prompt += `- **Accessibility:** Design the lesson layout with explicit structure (clear heading hierarchies). If any visual diagrams, charts, or slides are recommended, explicitly write out placeholder 'Alternative Text (Alt Text)' descriptions for screen-reader accessibility.\n`;
+        }
+
+        prompt += `\n### Required Output Format:
+Please organize the output with clear sections: Lesson Objectives (Bloom's Taxonomy focused), Required Materials, Class Timeline Breakdowns (e.g., Hook/Introduction, Core Delivery, Active Learning Activity, Wrap-up/Formative Assessment), and a dedicated "Instructor Notes" section detailing pedagogy tips for non-traditional or diverse student bodies.`;
+
+        promptOutput.textContent = prompt;
+    }
+
+    // Add event listeners to all inputs for real-time dynamic rendering
+    inputs.forEach(input => {
+        input.addEventListener('input', updatePrompt);
+    });
+
+    // Initialize the layout on first load
+    updatePrompt();
+
+    // Copy to clipboard function
+    function copyPrompt() {
+        const textToCopy = promptOutput.textContent;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            copyBtn.textContent = 'Copied!';
+            copyBtn.classList.add('copied');
+            
+            // Reset button text after 2 seconds
+            setTimeout(() => {
+                copyBtn.textContent = 'Copy Prompt';
+                copyBtn.classList.remove('copied');
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+            alert('Unable to copy. Please manually highlight the text and press Ctrl+C / Cmd+C.');
+        });
+    }
+</script>
+
+</body>
+</html>
